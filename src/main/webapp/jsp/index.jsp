@@ -18,21 +18,19 @@
 	src="<%=basePath%>/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
-<script type="text/javascript">
-
-</script>
 </head>
 <body>
 	<div>
 		<form id="uploadForm" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="file">选择文件</label> <input type="file" name="file"
-					id="file" multiple="multiple">
-				<img alt="" id="image" src="<%=basePath %>user/downLoad" width="112px" height="112px">
+					id="file" multiple="multiple"> <img alt="" id="image"
+					src="<%=basePath%>user/downLoad" width="112px" height="112px">
 			</div>
 		</form>
 		<a id="submit">上传</a>
 	</div>
+	<a id="download">导出Excel</a>
 	<script type="text/javascript">
     $(function () {
         $("#submit").click(function(){
@@ -54,6 +52,10 @@
 					}
 				});
 			});
+            $("#download").click(function(){
+            	window.location.href="<%=basePath%>user/download";
+			});
+
 		});
 	</script>
 </body>

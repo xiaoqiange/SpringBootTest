@@ -3,9 +3,7 @@ package com.cn.model;
 import java.util.Date;
 
 public class User {
-    private Integer uid;
     private String name;
-    private String password;
     private String code;
     private String phone;
     private Integer sex;
@@ -17,10 +15,9 @@ public class User {
     }
     
     
-    public User(String name, String password, String code, String phone, Integer sex, Integer age, Date birthday) {
+    public User(String name, String code, String phone, Integer sex, Integer age, Date birthday) {
         super();
         this.name = name;
-        this.password = password;
         this.code = code;
         this.phone = phone;
         this.sex = sex;
@@ -28,24 +25,11 @@ public class User {
         this.birthday = birthday;
     }
 
-
-    public Integer getUid() {
-        return uid;
-    }
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
     public String getName() {
         return name;
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
     }
     public String getCode() {
         return code;
