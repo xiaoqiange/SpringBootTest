@@ -115,7 +115,7 @@ public class UserController {
                sheet.addCell(label); 
                label = new Label(2, i+1, list.get(i).getPhone());
                sheet.addCell(label); 
-               label = new Label(3, i+1, list.get(i).getSex().toString());
+               label = new Label(3, i+1, (list.get(i).getSex()==1?"男":"女"));
                sheet.addCell(label); 
                label = new Label(4, i+1, list.get(i).getAge()+"");
                sheet.addCell(label); 
