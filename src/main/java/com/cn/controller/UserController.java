@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
@@ -134,5 +135,21 @@ public class UserController {
         outputStream.flush();
         outputStream.close();
         in.close();
+    }
+    
+    @RequestMapping("/test")
+    public void test() throws ClassNotFoundException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+        String [] fields = {"name","code","phone","sex","age","birthday"};
+        Class<?> c = Class.forName("com.cn.model.User");
+        Field[] declaredFields = c.getDeclaredFields();
+        List<User> list = userService.getAll();
+        for (User user : list) {
+            for (int i = 0; i < fields.length; i++) {
+                Field field = c.getDeclaredField(fields[i]);
+                field.setAccessible(true);
+                Object object = field.get(user);
+                System.out.println(object);
+            }
+        }
     }
 }
