@@ -2,6 +2,8 @@ package com.cn.controller;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.URL;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class TestController {
     
-    public static void main(String[] args) {
-        System.out.println("本机的外网ip是 ： "+TestController.getWebIp("http://2018.ip138.com/ic.asp"));
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+        Class<?> clazz = Class.forName("com.cn.controller.MyRunnable");
+        Field declaredField = clazz.getDeclaredField("i");
+        declaredField.setAccessible(true);
+        int i = declaredField.getInt(new MyRunnable());
+//        System.out.println("本机的外网ip是 ： "+TestController.getWebIp("http://2018.ip138.com/ic.asp"));
+        MyRunnable runnable = new MyRunnable();
+        for(int j=0;j < i;j++){
+            Thread thread = new Thread(runnable,"柜台1");
+            thread.start();
+            Thread thread1 = new Thread(runnable,"柜台2");
+            thread1.start();
+        }
     }
     
     public static String getWebIp(String str){
