@@ -1,19 +1,21 @@
 package com.cn.controller;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jxl.Cell;
+import jxl.Sheet;
 import jxl.Workbook;
+import jxl.read.biff.BiffException;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
@@ -30,8 +32,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.cn.model.User;
 import com.cn.service.UserService;
 
-@RestController
 //定义返回值都是json格式
+@RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -72,6 +74,14 @@ public class UserController {
         return 0;
     }
     
+    /**
+     * Description:[下载图片]<br>
+     * 处理逻辑：[业务复杂的方法罗列出处理逻辑，可选]<br>
+     * 适用场景：[描述方法使用的业务场景，可选]<br>
+     * @author liufq
+     * @update 2019年1月2日
+     * @param response
+     */
     @RequestMapping("/downLoad")
     public void downLoad(HttpServletResponse response){
         String filePath="D:/uploadTest/tupian.png";
@@ -149,6 +159,19 @@ public class UserController {
                 field.setAccessible(true);
                 Object object = field.get(user);
                 System.out.println(object);
+            }
+        }
+    }
+    
+    @RequestMapping("/importExcel")
+    public void ImportExcel() throws BiffException, IOException{
+        Workbook workbook = Workbook.getWorkbook(new File("D:\\uploadTest\\test.xls"));
+        Sheet sheet = workbook.getSheet(0);
+        List<User> users = new ArrayList<User>();
+        for (int i = 0; i < sheet.getRows(); i++) {
+            for (int j = 0; j < sheet.getColumns(); j++) {
+                Cell cell=sheet.getCell(j, i);
+                System.out.println(cell.getType());
             }
         }
     }
