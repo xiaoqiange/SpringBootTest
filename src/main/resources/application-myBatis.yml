@@ -1,4 +1,7 @@
 mybatis:
+    configuration:
+        lazyLoadingEnabled: true
+        aggressiveLazyLoading: false
     #扫描[mapper].xml文件
     mapper-locations:classpath: mapper/*.xml  
     #扫描类注解为Mapper的mapper文件所在的包  

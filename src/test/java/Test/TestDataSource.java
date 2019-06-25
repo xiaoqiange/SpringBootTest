@@ -16,12 +16,15 @@ import jxl.write.biff.RowsExceededException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.alibaba.fastjson.JSON;
 import com.cn.SpringBootApplicationTest;
-import com.cn.model.User;
+import com.cn.mapper.UserMapper;
+import com.cn.model.Scores;
 
 @SpringBootTest(classes = SpringBootApplicationTest.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,6 +32,8 @@ import com.cn.model.User;
 public class TestDataSource {
     @Resource
     private DataSource dataSource;
+    @Autowired
+    private UserMapper userMapper;
     @Test
     public void test(){
         System.out.println("11111"+this.dataSource);
@@ -76,5 +81,11 @@ public class TestDataSource {
 //               label = new Label(i, i+1, list.get(i).getBirthday().toGMTString());
 //               sheet.addCell(label); 
 //        }
+    }
+    @Test
+    public void mybatisCache(){
+        System.out.println("测试mybatis懒加载！");
+        List<Scores> scores = userMapper.getScores();
+        System.out.println(JSON.toJSONString(scores.get(0).getStudent(), true));
     }
 }

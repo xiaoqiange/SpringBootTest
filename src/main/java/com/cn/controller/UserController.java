@@ -38,7 +38,6 @@ import com.cn.service.UserService;
 public class UserController {
     @Autowired
     private UserService userService;
-
     @RequestMapping("/getAll")
     public Object getAll() {
         List<User> list = userService.getAll();
@@ -171,8 +170,49 @@ public class UserController {
         for (int i = 0; i < sheet.getRows(); i++) {
             for (int j = 0; j < sheet.getColumns(); j++) {
                 Cell cell=sheet.getCell(j, i);
-                System.out.println(cell.getType());
+                System.out.println(cell.toString());
             }
         }
+    }
+    public static void main(String[] args) {
+        Mee mee1 = Mee.getInstance();
+        System.out.println(mee1);
+        Mee mee2 = Mee.getInstance();
+        System.out.println(mee2);
+        Mee mee3 = Mee.getInstance();
+        System.out.println(mee3);
+        
+        EnumSingleton em1 = EnumSingleton.INSTANCE;
+        em1.print();
+        EnumSingleton em2 = EnumSingleton.INSTANCE;
+        em2.print();
+        EnumSingleton em3 = EnumSingleton.INSTANCE;
+        em3.print();
+    }
+}
+class Mee {
+    private volatile static Mee mee;
+    private Mee(){}
+    public static Mee getInstance(){
+        if(mee ==null){
+            synchronized(Mee.class){
+                if(mee == null){
+                    mee = new Mee();
+                }
+            }
+        }
+        return mee;
+    }
+}
+
+enum EnumSingleton{
+    INSTANCE;
+    
+    private EnumSingleton(){
+        System.out.println("init");
+    }
+    
+    public void print(){
+        System.out.println("print()");
     }
 }

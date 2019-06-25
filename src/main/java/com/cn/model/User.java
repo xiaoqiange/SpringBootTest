@@ -9,7 +9,17 @@ public class User {
     private Integer sex;
     private Integer age;
     private Date birthday;
-    
+    private Role role;
+    public Role getRole() {
+        return role;
+    }
+
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+
     public User() {
         // TODO Auto-generated constructor stub
     }

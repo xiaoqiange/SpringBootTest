@@ -4,4 +4,16 @@
     <select id="getAll" resultType="user">
         select name,code,phone,sex,age,birthday from user
     </select>
+    <resultMap type="com.cn.model.Scores" id="getScoresMap">
+        <id column="id" property="id"/>
+        <result column="cno" property="cno"/>
+        <result column="degree" property="degree"/>
+        <association property="student" column="sno" javaType="com.cn.model.Student" select="getStudentBySno"/>
+    </resultMap>
+    <select id="getScores" resultMap="getScoresMap">
+        select * from scores
+    </select>
+    <select id="getStudentBySno" resultType="Student">
+        select * from students where sno=#{sno}
+    </select>
 </mapper>
