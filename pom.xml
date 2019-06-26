@@ -107,15 +107,6 @@
 				</descriptorRefs> </configuration> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-			<!-- 在项目中的pom.xml指定jdk版本 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.2</version>
 				<configuration>
@@ -124,5 +115,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>test</finalName>
 	</build>
 </project>
