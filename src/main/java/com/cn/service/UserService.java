@@ -10,5 +10,6 @@ import com.cn.model.User;
 public interface UserService {
     public List<User> getAll();
     public void downLoadExcel(HttpServletResponse response,List<?> list);
+    //分数
     public List<Scores> list();
 }
