@@ -1,6 +1,9 @@
 server:
     port: 8080
 spring:
+    thymeleaf:
+        cache: false
+        enabled: false
     datasource:
         url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8
         username: root
